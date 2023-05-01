@@ -32,10 +32,8 @@
 
       <!-- Right elements -->
       <div class="col-3 offset-9 ">
-      <a href="login.php" class="btn btn-outline-secondary btn-lg mx-2">Login</a>
-        <!-- <button type="button" class="btn btn-outline-secondary px-3 me-2">Login</button> -->
-        <a href="#" class="btn btn-outline-primary btn-lg">Register</a>
-        <!-- <button type="button" class="btn btn-outline-primary me-3">Register</button> -->
+      <button type="button" class="btn btn-outline-secondary btn-lg px-3 me-2" data-toggle="modal" data-target="#exampleModalCenter">Login</button>
+      <button type="button" class="btn btn-outline-primary btn-lg px-3 me-2" data-toggle="modal" data-target="#exampleModal">Register</button>  
       </div>
       <!-- Right elements -->
       
@@ -46,18 +44,103 @@
   <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
-
+     <!-- Modal Login -->
+     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"><h2>Login</h2></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="signup-form">
+    <form action="loginProcess.php" method="post">
+		<p class="hint-text p-2">Enter your login details</p>
+        <div class="form-group p-2">
+        	<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+		<div class="form-group p-2">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+		<div class="form-group p-2" >
+            <button type="submit" name="login" class="btn btn-success">Login</button>
+        </div>
+    </form>
+	<?php if (isset($_GET['error'])): ?>
+	<div class="alert alert-danger mt-3" role="alert">
+		Invalid email or password. Please try again.
+	</div>
+	<?php endif; ?>
+</div>
+      </div>
+      <div class="modal-footer text-left" >
+      <div >Don't have an account? <a href="register.php">Register Here</a></div>
+      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Login -->
+<!-- Modal SignUp-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><h2>Register</h2></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="signup-form">
+    <form action="register_a.php" method="post" enctype="multipart/form-data">
+		
+		<p class="hint-text">Create your account</p>
+        <div class="form-group p-2">
+			<div class="row">
+				<div class="col"><input type="text" class="form-control" name="first_name" placeholder="First Name" required="required"></div>
+				<div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required"></div>
+			</div>        	
+        </div>
+        <div class="form-group p-2">
+        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        </div>
+		<div class="form-group p-2">
+            <input type="password" class="form-control" name="pass" placeholder="Password" required="required">
+        </div>
+		<div class="form-group p-2">
+            <input type="password" class="form-control" name="cpass" placeholder="Confirm Password" required="required">
+        </div>
+        <!-- <div class="form-group">
+            <input type="file" name="file" required>
+            <input type="submit" name="upload" value="Upload" class="btn">
+        </div>         -->
+        <div class="form-group p-2">
+			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a></label>
+		</div>
+		<div class="form-group p-2">
+            <button type="submit" name="save" class="btn btn-success btn-block">Register Now</button>
+        </div>
+        
+    </form>
+	
+</div>
+      </div>
+      <div class="modal-footer">
+      <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal SignUp-->
 <main>
     <div class="container py-5 mt-5" style="text-align: center " >
         <h1>Contact App</h1>
         <p class="lead p-2">Contact App gives you everything you need to organize your contacts easily.
         </p>
-        <!-- <div class="d-flex justify-content-md-center ">
-             <a href="#" class="btn btn-primary btn-lg mx-2">Login</a>
-            <a href="#" class="btn btn-outline-secondary btn-lg">Register</a>
-
-        </div> -->
-    </div>
+      </div>
 
     <div class="py-5" style="background-color:#f9fafb">
         <div class="container py-5 " style="background-color:#f9fafb">
@@ -143,7 +226,6 @@
             <footer class="pt-4 ">
                 <div class="row">
                   <div class="col-12 col-md" >
-                    <!-- <img class="mb-2" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24"> -->
                     <a class="navbar-brand text-light" style="font-weight: bolder;" href="#">CONTACT APP</a>
                     <mdall class="d-block mb-3 text-muted">© 2017-2018</mdall>
                   </div>
@@ -180,13 +262,24 @@
               </footer>
         </div>
     </div>
-
-
-
 </main>
 
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("form").submit(function(event) {
+    var email = $("#email").val();
+    var password = $("#password").val();
+    if (!email || !password) {
+      event.preventDefault();
+      alert("Please enter your email and password.");
+    }
+  });
+});
+</script>
 </body>
 </html>

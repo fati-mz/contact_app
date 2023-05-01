@@ -134,7 +134,6 @@ include_once 'database.php';?>
 
         mysqli_close($conn);
       ?>
-      
 
     <!-- pagination -->
 
