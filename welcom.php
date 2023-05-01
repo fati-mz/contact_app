@@ -89,13 +89,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><h2>Register</h2></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" name="save" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       <div class="signup-form">
-    <form action="register_a.php" method="post" enctype="multipart/form-data">
+    <form action="register.php" method="post" enctype="multipart/form-data">
 		
 		<p class="hint-text">Create your account</p>
         <div class="form-group p-2">

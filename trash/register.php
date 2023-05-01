@@ -48,10 +48,6 @@
 		<div class="form-group">
             <input type="password" class="form-control" name="cpass" placeholder="Confirm Password" required="required">
         </div>
-        <!-- <div class="form-group">
-            <input type="file" name="file" required>
-            <input type="submit" name="upload" value="Upload" class="btn">
-        </div>         -->
         <div class="form-group">
 			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a></label>
 		</div>
