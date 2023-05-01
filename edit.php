@@ -12,7 +12,7 @@
 
 <?php 
 require_once "nav.php";
-include_once 'database.php';
+require_once "database.php";
 
 // Check if the form has been submitted
 if(isset($_POST['save'])) {
@@ -62,12 +62,14 @@ $companies = mysqli_query($conn,"SELECT company FROM users");
               <label for="company">Company</label>
               <select class="form-control" id="company" name="company">
                 <?php while($company = mysqli_fetch_assoc($companies)): ?>
-                  <option value="<?php echo $company['name']; ?>" <?php if($row['company'] == $company['company']) echo 'selected'; ?>><?php echo $company['name']; ?></option>
+                  <option value="<?php echo $company['company']; ?>" <?php if($row['company'] == $company['company']) echo 'selected'; ?>><?php echo $company['company']; ?></option>
                 <?php endwhile; ?>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary" name="save"><i class="fa fa-save"></i> Save</button>
-            <a href="index.php" class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Back to Contacts</a>
+            <div class="form-group mb-3">
+              <button type="submit" class="btn btn-primary " name="save" value="save"><i class="fa fa-save"></i> Save</button>
+              <a href="index.php" class="btn btn-danger"><i class="fa fa-close"></i> Cancel</a>
+            </div>
           </form>
         </div>
       </div>
@@ -75,9 +77,8 @@ $companies = mysqli_query($conn,"SELECT company FROM users");
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@2.9.3/dist/umd/popper.min.js" integrity="sha384-6aUncykCeu7rZ8JW5qx7YhZ6lduM7x5Xe1uV5v5F6UjV6Zd3hUgtV6UJbIxU3zEV" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-9WjDvM94TfT1JU5p6m5nBbZc6+Zz6J2/o9n7YP4M2MAKq3N6wv1wxWJ+RkNpLZjP" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@2.9.3/dist/umd/popper.min.js" integrity="sha384-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </body>
 </html>

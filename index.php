@@ -117,8 +117,7 @@ include_once 'database.php';?>
         echo("</td><td>");
         echo($row['company']);
         echo('<td >
-                <a href="show.php?id='.$row["id"].'&first_name='.$row["first_name"].'&last_name='.$row["last_name"].'&
-                email='.$row["email"].'&phone='.$row["phone"].'&address='.$row["address"].'&company='.$row["company"].'"
+                <a href="show.php?id='.$row["id"].'"
                 class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
                 
                 <a href="edit.php?id='.$row["id"].'" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>

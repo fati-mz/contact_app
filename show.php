@@ -12,7 +12,10 @@
 
 <?php 
 require_once "nav.php";
-// include_once 'database.php';
+include_once 'database.php';
+// Display the user's information
+$result = mysqli_query($conn,"SELECT * FROM users WHERE id='" . $_GET['id'] . "'");
+$row = mysqli_fetch_assoc($result);
 ?>
 <script>
       function ConfirmDelete()
@@ -35,44 +38,44 @@ require_once "nav.php";
                             <div class="form-group row m-3">
                                 <label for="staticFName" class="col-md-3 col-form-label">First Name</label>
                                 <div class="col-md-9">
-                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $_GET["first_name"]?>">
+                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $row["first_name"]?>">
                                 </div>
                             </div>
                             <div class="form-group row m-3">
                                 <label for="staticLName" class="col-md-3 col-form-label">Last Name</label>
                                 <div class="col-md-9">
-                                  <input type="text" readonly class="form-control-plaintext text-muted"  value="<?php echo $_GET["last_name"]?>">
+                                  <input type="text" readonly class="form-control-plaintext text-muted"  value="<?php echo $row["last_name"]?>">
                                 </div>
                             </div>
                             <div class="form-group row m-3">
                                 <label for="staticEmail" class="col-md-3 col-form-label">Email</label>
                                 <div class="col-md-9">
-                                  <input type="text" readonly class="form-control-plaintext text-muted"value="<?php echo $_GET["email"]?>">
+                                  <input type="text" readonly class="form-control-plaintext text-muted"value="<?php echo $row["email"]?>">
                                 </div>
                             </div>
                             <div class="form-group row m-3">
                                 <label for="staticPhone" class="col-md-3 col-form-label">Phone</label>
                                 <div class="col-md-9">
-                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $_GET["phone"]?>">
+                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $row["phone"]?>">
                                 </div>
                             </div>
                             <div class="form-group row m-3">
                                 <label for="staticAddress" class="col-md-3 col-form-label">Address</label>
                                 <div class="col-md-9">
-                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $_GET["address"]?>">
+                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $row["address"]?>">
                                 </div>
                             </div>
                               <div class="form-group row m-3 ">
                                 <label for="staticCompany" class="col-md-3 col-form-label">Company</label>
                                 <div class="col-md-9">
-                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $_GET["company"]?>">
+                                  <input type="text" readonly class="form-control-plaintext text-muted" value="<?php echo $row["company"]?>">
                                 </div>
                               </div>
                             </div>
                             <hr class="m-0">  
                             <div class="form-group row m-3">
                               <div class="col-md-9 offset-md-3">
-                                <a href="edit.php" class="btn btn-primary">Edit</a>
+                                <a href="edit.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-primary">Edit</a>
                                 <a href="delete-process.php?id=<?php echo $_GET["id"]; ?>" onclick="ConfirmDelete()" class="btn btn-outline-danger">Delete</a>
                                 <a href="index.php" class="btn btn-outline-secondary">Cancel</a>
 
