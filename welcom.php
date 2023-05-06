@@ -1,3 +1,40 @@
+
+<?php
+session_start();
+
+// Form submission handling
+extract($_POST);
+include("database.php");
+$sql=mysqli_query($conn,"SELECT * FROM contact_users where Email='$email'");
+if(mysqli_num_rows($sql)>0)
+{
+    echo "<script>
+          alert('Email Already Exist');
+          </script>";
+  //   echo('<div class="alert alert-primary" role="alert">
+  //   This is a primary alert—check it out!
+  // </div>');
+	exit;
+}
+elseif (isset($_POST['save'])) {
+  $_SESSION["first_name"] = $_POST['first_name'];
+  $_SESSION["last_name"] = $_POST['last_name'];
+  $email = $_POST['email'];
+  $password = md5($_POST['pass']);
+  
+  // Insert user data into MySQL database
+  $sql = "INSERT INTO contact_users (first_name, last_name, email, password) VALUES ('$first_name', '$last_name', '$email', '$password')";
+  
+  if (mysqli_query($conn, $sql)) {
+    header("location:profile.php");
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
+}
+
+mysqli_close($conn);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +45,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>My Contact</title>
 </head>
+<script>  
+function onChange() {
+  const password = document.querySelector('input[name=password]');
+  const confirm = document.querySelector('input[name=confirm]');
+  if (confirm.value === password.value) {
+    confirm.setCustomValidity('');
+  } else {
+    confirm.setCustomValidity('Passwords do not match');
+  }
+}
+</script> 
 <body style=" font-family: sans-serif">
   <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm p-3" >
@@ -56,7 +104,7 @@
       </div>
       <div class="modal-body">
       <div class="signup-form">
-    <form action="loginProcess.php" method="post">
+    <form action="" method="post">
 		<p class="hint-text p-2">Enter your login details</p>
         <div class="form-group p-2">
         	<input type="email" class="form-control" id="email" name="email" placeholder="Email">
@@ -95,8 +143,7 @@
       </div>
       <div class="modal-body">
       <div class="signup-form">
-    <form action="register.php" method="post" enctype="multipart/form-data">
-		
+    <form action="" method="post" enctype="multipart/form-data" >
 		<p class="hint-text">Create your account</p>
         <div class="form-group p-2">
 			<div class="row">
@@ -108,11 +155,11 @@
         	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
         </div>
 		<div class="form-group p-2">
-            <input type="password" class="form-control" name="pass" placeholder="Password" required="required">
+            <input type="password" class="form-control" name="pass" placeholder="Password" required="required" onChange="onChange()">
         </div>
-		<div class="form-group p-2">
+		<!-- <div class="form-group p-2">
             <input type="password" class="form-control" name="cpass" placeholder="Confirm Password" required="required">
-        </div>
+        </div> -->
         <!-- <div class="form-group">
             <input type="file" name="file" required>
             <input type="submit" name="upload" value="Upload" class="btn">

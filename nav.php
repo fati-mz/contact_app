@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+include_once 'database.php';
+
+$name = $_SESSION['first_name']." ".$_SESSION['last_name'];
+
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3  bg-body border-bottom">
   <!-- Container wrapper -->
   <div class="container" style="width: 77%;">
@@ -35,10 +43,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
          <ul class="navbar-nav">
           <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">John Doe</a>
+           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $name?></a>
              <ul class="dropdown-menu dropdown-menu">
               <li><a class="dropdown-item" href="profile.php">Setting</a></li>
-              <li><a class="dropdown-item" href="#">Log Out</a></li>
+              <li><button class="dropdown-item" href="welcom.php">Log Out</button></li>
              </ul>
           </li>
          </ul>
