@@ -68,22 +68,22 @@ include_once 'database.php';?>
       $offset = ($pageno-1) * $no_of_records_per_page;
 
     
-
-      $total_pages_sql = "SELECT COUNT(*) FROM users";
+      $contact_id=$_SESSION["id"];
+      $total_pages_sql = "SELECT COUNT(*) FROM users where contact_id=$contact_id";
       $result = mysqli_query($conn,$total_pages_sql);
       $total_rows = mysqli_fetch_array($result)[0];
       $total_pages = ceil($total_rows / $no_of_records_per_page);
       
       if (isset($_POST['search'])) {
         $Name = $_POST['search'];
-        $sql = "SELECT * FROM users WHERE first_name LIKE '%$Name%' or email like '%$Name%' LIMIT $offset, $no_of_records_per_page";}
+        $sql = "SELECT * FROM users WHERE contact_id = $contact_id AND (first_name LIKE '%$Name%' OR email LIKE '%$Name%') LIMIT $offset, $no_of_records_per_page";}
       
       elseif(isset($_POST['submit'])) {
         $var = $_POST['select_company'];
-        $sql = "SELECT * FROM users WHERE company=$var  LIMIT $offset, $no_of_records_per_page";
+        $sql = "SELECT * FROM users WHERE company=$var  and contact_id=$contact_id LIMIT $offset, $no_of_records_per_page";
       }
       else {
-        $sql = "SELECT * FROM users LIMIT $offset, $no_of_records_per_page";
+        $sql = "SELECT * FROM users where contact_id=$contact_id LIMIT $offset, $no_of_records_per_page";
       }
       
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include_once 'database.php';
 
@@ -8,8 +9,9 @@ if(isset($_POST['save']))
 	 $last_name = $_POST['last_name'];
 	 $company= $_POST['company'];
 	 $email = $_POST['email'];
-	 $sql = "INSERT INTO users (first_name,last_name,company,email)
-	 VALUES ('$first_name','$last_name','$company','$email')";
+	 $contact_id=$_SESSION["id"];
+	 $sql = "INSERT INTO users (first_name,last_name,company,email,contact_id)
+	 VALUES ('$first_name','$last_name','$company','$email','$contact_id')";
 	 if (mysqli_query($conn, $sql)) {
 		echo "New record created successfully !";
         header("location:index.php");

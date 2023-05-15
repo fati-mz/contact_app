@@ -46,7 +46,7 @@ $name = $_SESSION['first_name']." ".$_SESSION['last_name'];
            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $name?></a>
              <ul class="dropdown-menu dropdown-menu">
               <li><a class="dropdown-item" href="profile.php">Setting</a></li>
-              <li><button class="dropdown-item" href="welcom.php">Log Out</button></li>
+              <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
              </ul>
           </li>
          </ul>

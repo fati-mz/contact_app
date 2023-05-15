@@ -1,30 +1,60 @@
 
 <?php
 session_start();
-
 // Form submission handling
 extract($_POST);
 include("database.php");
-$sql=mysqli_query($conn,"SELECT * FROM contact_users where Email='$email'");
-if(mysqli_num_rows($sql)>0)
-{
-    echo "<script>
-          alert('Email Already Exist');
-          </script>";
-  //   echo('<div class="alert alert-primary" role="alert">
-  //   This is a primary alert—check it out!
-  // </div>');
-	exit;
+
+// login
+if(isset($_POST['login']))
+{   
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $sql=mysqli_query($conn,"SELECT * FROM contact_users where Email='$email' and password='$password'");
+    $row  = mysqli_fetch_array($sql);
+   // if(mysqli_num_rows($sql)>0)
+   if($row)
+    {
+        $_SESSION["id"] = $row['id'];
+        // $_SESSION["email"]=$email;
+        $_SESSION["first_name"]=$row['first_name'];
+        $_SESSION["last_name"]=$row['last_name']; 
+        header("Location: index.php"); 
+    }
+    else
+    {
+        echo "<script>
+            alert('Invalid Email ID/Password');
+            </script>";
+            // header("Location: profile.php"); 
+
+    }
 }
-elseif (isset($_POST['save'])) {
+
+// register
+if (isset($_POST['save'])) {
+  $sql=mysqli_query($conn,"SELECT * FROM contact_users where Email='$email'");
+  if(mysqli_num_rows($sql)>0)
+  {
+      echo "<script>
+            alert('Email Already Exist');
+            </script>";
+    //   echo('<div class="alert alert-primary" role="alert">
+    //   This is a primary alert—check it out!
+    // </div>');
+    exit;
+  }
+else{
   $_SESSION["first_name"] = $_POST['first_name'];
   $_SESSION["last_name"] = $_POST['last_name'];
+  // $_SESSION["id"]=$row['id'];
   $email = $_POST['email'];
   $password = md5($_POST['pass']);
   
   // Insert user data into MySQL database
   $sql = "INSERT INTO contact_users (first_name, last_name, email, password) VALUES ('$first_name', '$last_name', '$email', '$password')";
   
+}
   if (mysqli_query($conn, $sql)) {
     header("location:profile.php");
   } else {
