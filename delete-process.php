@@ -1,5 +1,6 @@
 <?php
-include_once 'database.php';
+// session_start();
+include_once 'pdo.php';
 
 $sql = "DELETE FROM users WHERE id='" . $_GET["id"] . "'";
 if (mysqli_query($conn, $sql)) {

@@ -3,7 +3,7 @@
 session_start();
 // Form submission handling
 extract($_POST);
-include("database.php");
+include("pdo.php");
 
 // login
 if(isset($_POST['login']))
@@ -12,11 +12,9 @@ if(isset($_POST['login']))
     $password = md5($_POST['password']);
     $sql=mysqli_query($conn,"SELECT * FROM contact_users where Email='$email' and password='$password'");
     $row  = mysqli_fetch_array($sql);
-   // if(mysqli_num_rows($sql)>0)
    if($row)
     {
         $_SESSION["id"] = $row['id'];
-        // $_SESSION["email"]=$email;
         $_SESSION["first_name"]=$row['first_name'];
         $_SESSION["last_name"]=$row['last_name']; 
         header("Location: index.php"); 
@@ -26,8 +24,6 @@ if(isset($_POST['login']))
         echo "<script>
             alert('Invalid Email ID/Password');
             </script>";
-            // header("Location: profile.php"); 
-
     }
 }
 
@@ -39,15 +35,11 @@ if (isset($_POST['save'])) {
       echo "<script>
             alert('Email Already Exist');
             </script>";
-    //   echo('<div class="alert alert-primary" role="alert">
-    //   This is a primary alert—check it out!
-    // </div>');
     exit;
   }
 else{
   $_SESSION["first_name"] = $_POST['first_name'];
   $_SESSION["last_name"] = $_POST['last_name'];
-  // $_SESSION["id"]=$row['id'];
   $email = $_POST['email'];
   $password = md5($_POST['pass']);
   
@@ -56,6 +48,9 @@ else{
   
 }
   if (mysqli_query($conn, $sql)) {
+    $sql=mysqli_query($conn,"SELECT * FROM contact_users where Email='$email'");
+    $row  = mysqli_fetch_array($sql);
+    $_SESSION['id']=$row['id'];
     header("location:profile.php");
   } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);

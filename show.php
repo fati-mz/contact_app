@@ -11,8 +11,9 @@
 <body style="background-color:#f7f7f7; font-family: 'Varela rounded', sans-serif;">
 
 <?php 
+// session_start();
 require_once "nav.php";
-include_once 'database.php';
+include_once 'pdo.php';
 // Display the user's information
 $result = mysqli_query($conn,"SELECT * FROM users WHERE id='" . $_GET['id'] . "'");
 $row = mysqli_fetch_assoc($result);

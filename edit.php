@@ -11,8 +11,9 @@
 <body style="background-color:#f7f7f7; font-family: 'Varela rounded', sans-serif;">
 
 <?php 
+// session_start();
 require_once "nav.php";
-require_once "database.php";
+require_once "pdo.php";
 
 // Check if the form has been submitted
 if(isset($_POST['save'])) {

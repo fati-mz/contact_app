@@ -10,7 +10,24 @@
 </head>
 <body style="background-color:#f7f7f7; font-family: 'Varela rounded', sans-serif;">
   <!-- Navbar -->
-  <?php require_once "nav.php"?>
+  <?php 
+  // session_start();
+require_once "nav.php";
+require_once "pdo.php";
+
+// Check if the form has been submitted
+if(isset($_POST['save'])) {
+    mysqli_query($conn,"UPDATE contact_users set first_name='" . $_POST['first_name'] . "', last_name='" . $_POST['last_name'] . "',  bio='" . $_POST['bio'] . "', company='" . $_POST['company'] . "' WHERE id='" . $_SESSION['id'] . "'");
+    // $_SESSION["first_name"]=$_POST['first_name'];
+    // $_SESSION["last_name"]=$_POST['last_name']; 
+    header("Location: profile.php");
+    exit();
+}
+
+// Display the user's information
+$result = mysqli_query($conn,"SELECT * FROM contact_users WHERE id='" . $_SESSION['id'] . "'");
+$row = mysqli_fetch_assoc($result);
+?>
 <!-- Navbar -->
 
 
@@ -33,24 +50,24 @@
                 <strong>Edit Profile</strong>
             </div>
             <div class="card-body ">
-                <form class="row col-md-12 ">
+                <form class="row col-md-12" method="post">
                   <div class="col-md-8 ">
                     <div class="mb-3">
                       <label for="first_name" class="form-label">First Name</label>
-                      <input type="text" class="form-control is-invalid" id="first_name" >
+                      <input type="text" class="form-control is-invalid" id="first_name" value="<?php echo $row['first_name']; ?>" >
                       <div class="invalid-feedback">Please choose a username.</div>
                     </div>
                     <div class="mb-3">
                       <label for="last_name" class="form-label">Last Name</label>
-                      <input type="text" class="form-control " id="last_name" >
+                      <input type="text" class="form-control " id="last_name" value="<?php echo $row['last_name']; ?>">
                     </div>
                     <div class="mb-3">
                       <label for="company" class="form-label">Company</label>
-                      <input type="text" class="form-control " id="company" >
+                      <input type="text" class="form-control " id="company" value="<?php echo $row['company']; ?>" >
                     </div>
                     <div class="mb-3">
                       <label for="bio" class="form-label">Bio</label>
-                      <textarea class="form-control" id="bio" rows="3"></textarea>
+                      <textarea class="form-control" id="bio" rows="3"><?php echo $row['bio']; ?></textarea>
                     </div>
                   </div>
 
@@ -72,7 +89,7 @@
                     <hr class="m-0">  
                     <div class="form-group row m-3">
                       <div class="col-md-9 ">
-                        <button type="submit" class="btn btn-success">Update Profile</button>
+                        <button type="submit" class="btn btn-success" name="save">Update Profile</button>
                       </div>
                     </div>
                   </form>

@@ -15,8 +15,10 @@
 </head>
 <body style="background-color:#f7f7f7; font-family: 'Varela rounded', sans-serif;">
 
-<?php require_once "nav.php";
-include_once 'database.php';?>
+<?php 
+// session_start();
+require_once "nav.php";
+include_once 'pdo.php';?>
 
 
 <main class=" m-auto p-5" style="width: 80%;">

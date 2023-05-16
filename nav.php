@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once 'database.php';
+include_once 'pdo.php';
 
 $name = $_SESSION['first_name']." ".$_SESSION['last_name'];
 
